@@ -6,9 +6,10 @@ Implementation of the methods proposed in the paper:
 > Nay Klaimi, Amira Bedoui, Clément Elvira, Philippe Mary, Luc Le Magoarou  
 > SPAWC 2025
 ## Getting Started
+### Install dependencies
 <!-- requirements.txt -->
 
-## Generate needed data from sionna library 
+### Generate needed data from sionna library 
 generate_data_sionna.py ==> generate_data_varying_snr.py ==> generate_M_DOA.py
 <!-- write code that executes all of data generation -->
 
@@ -24,16 +25,17 @@ Please consider citing the original paper if this code contributes to your work.
       primaryClass={eess.SP},
       url={https://arxiv.org/abs/2505.04255}, 
 }
+```
 <!-- Reminder: Update this section once the paper is published -->
 
 
 
-
-# mpnet
+<!--
+mpnet
 opt data load 
 redundancy between run_mpnet and estimate_channels
 
-# uPGA
+uPGA
 optmizie functions definition:
 (DONE NEEDS TEST)"sum_loss" and "evaluate" functs
 "plot_sum_rate" and "save_sum_rate" functions
@@ -41,14 +43,13 @@ avoid redundancy w/ plots.py
 opt data load
 uPGA_true_channel
 
-# E2E 
+E2E 
 optmizie functions definition:  "sum_loss" and "evaluate" functs
 "plot_sum_rate" and "save_sum_rate" functions
 in both E2E and E2E_naive files
 avoid redundancy w/ plots.py 
 opt data load
 
-# paper code
+paper code
 code thats plots figures for the paper
-
-optimize paths
+optimize paths-->

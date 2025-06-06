@@ -1,11 +1,33 @@
-## joint_mpNet_uPGA
+# Model-based learning for joint channel estimation and hybrid MIMO precoding
 
+Implementation of the methods proposed in the paper:
 
+>📄 [Model-based learning for joint channel estimation and hybrid MIMO precoding](https://arxiv.org/abs/2505.04255)
+> Nay Klaimi, Amira Bedoui, Clément Elvira, Philippe Mary, Luc Le Magoarou  
+> SPAWC 2025
+## Getting Started
+<!-- requirements.txt -->
 
-
-# Generate needed data from sionna library 
+## Generate needed data from sionna library 
 generate_data_sionna.py ==> generate_data_varying_snr.py ==> generate_M_DOA.py
-write code that ecutes all of data generation (?)
+<!-- write code that executes all of data generation -->
+
+## 📚 Citation
+Please consider citing the original paper if this code contributes to your work.
+```bibtex
+@misc{klaimi2025modelbasedlearningjointchannel,
+      title={Model-based learning for joint channel estimationand hybrid MIMO precoding}, 
+      author={Nay Klaimi and Amira Bedoui and Clément Elvira and Philippe Mary and Luc Le Magoarou},
+      year={2025},
+      eprint={2505.04255},
+      archivePrefix={arXiv},
+      primaryClass={eess.SP},
+      url={https://arxiv.org/abs/2505.04255}, 
+}
+<!-- Reminder: Update this section once the paper is published -->
+
+
+
 
 # mpnet
 opt data load 

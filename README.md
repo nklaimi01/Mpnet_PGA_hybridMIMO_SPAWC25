@@ -2,7 +2,7 @@
 
 Implementation of the methods proposed in the paper:
 
->📄 [Model-based learning for joint channel estimation and hybrid MIMO precoding](https://arxiv.org/abs/2505.04255)
+>📄 [Model-based learning for joint channel estimation and hybrid MIMO precoding](https://arxiv.org/abs/2505.04255)  
 > Nay Klaimi, Amira Bedoui, Clément Elvira, Philippe Mary, Luc Le Magoarou  
 > SPAWC 2025
 ## Getting Started

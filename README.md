@@ -10,7 +10,7 @@ Implementation of the methods proposed in the paper:
 <!-- requirements.txt -->
 
 ### Generate needed data from sionna library 
-generate_data_sionna.py ==> generate_data_varying_snr.py ==> generate_M_DOA.py
+<!-- generate_data_sionna.py ==> generate_data_varying_snr.py ==> generate_M_DOA.py -->
 <!-- write code that executes all of data generation -->
 
 ## 📚 Citation

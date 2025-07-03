@@ -8,13 +8,13 @@ Implementation of the methods proposed in the paper:
 ## Getting Started
 ⚠️ This project requires **Python 3.9**.
 
-If you are using a different Python version, ensure to downgrade to Python 3.9 in your environment to avoid compatibility issues (e.g., `pkgutil.ImpImporter` error).
+If you are using a different Python version, make sure to downgrade to Python 3.9 in your environment to avoid compatibility issues.
 
 ### Setting Up the Environment
 It is **recommended** to create a virtual environment before installing dependencies.
 #### 🧪 Option 1: Using `venv` (Standard Python Virtual Environment)
 ```bash
-# Create virtual environment
+# Create virtual environment with Python 3.9
 python3.9 -m venv myenv
 
 # Activate the environment

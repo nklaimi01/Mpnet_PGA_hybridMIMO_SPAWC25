@@ -7,8 +7,9 @@ Implementation of the methods proposed in the paper:
 > SPAWC 2025
 ## Getting Started
 ### Prerequisites
-- Python 3.9 is required for this project.
-  **Note:** If you are using a different Python version, please downgrade to Python 3.9 in your environment to avoid compatibility issue
+Python 3.9 is required for this project.
+
+**Note:** If you are using a different Python version, please downgrade to Python 3.9 in your environment to avoid compatibility issue
 
 ### 📦 Install Dependencies
 To install all required Python packages, run the following command:

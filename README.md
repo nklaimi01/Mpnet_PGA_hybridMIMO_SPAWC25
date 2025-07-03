@@ -6,11 +6,28 @@ Implementation of the methods proposed in the paper:
 > Nay Klaimi, Amira Bedoui, Clément Elvira, Philippe Mary, Luc Le Magoarou  
 > SPAWC 2025
 ## Getting Started
-### Prerequisites
-Python 3.9 is required for this project.
+### ⚠️ Python Compatibility
+This project requires **Python 3.9**.
 
-**Note:** If you are using a different Python version, please downgrade to Python 3.9 in your environment to avoid compatibility issue
+If you are using a different Python version, ensure to downgrade to Python 3.9 in your environment to avoid compatibility issues (e.g., `pkgutil.ImpImporter` error).
 
+### 💻 Setting Up the Environment
+It is recommended to create a virtual environment before installing dependencies.
+#### 🧪 Option 1: Using `venv` (Standard Python Virtual Environment)
+```bash
+# Create virtual environment
+python3.9 -m venv myenv
+
+# Activate the environment
+source myenv/bin/activate      # Unix/macOS
+myenv\Scripts\activate         # Windows
+```
+#### 🐍 Option 2: Using conda
+````bash
+# Create and activate a conda environment with Python 3.9
+conda create -n myenv python=3.9
+conda activate myenv
+```
 ### 📦 Install Dependencies
 To install all required Python packages, run the following command:
 ```bash

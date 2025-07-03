@@ -6,10 +6,12 @@ Implementation of the methods proposed in the paper:
 > Nay Klaimi, Amira Bedoui, Clément Elvira, Philippe Mary, Luc Le Magoarou  
 > SPAWC 2025
 ## Getting Started
-### Install dependencies
-<!-- requirements.txt -->
+### 📦 Install Dependencies
+To install all required Python packages, run the following command:
+```bash
+pip install -r requirements.txt
 
-### Generate needed data from sionna library 
+### Generate needed data using sionna library 
 <!-- generate_data_sionna.py ==> generate_data_varying_snr.py ==> generate_M_DOA.py -->
 <!-- write code that executes all of data generation -->
 

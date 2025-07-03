@@ -21,7 +21,7 @@ python3.9 -m venv myenv
 source myenv/bin/activate      # Unix/macOS
 myenv\Scripts\activate         # Windows
 ```
-#### 🐍 Option 2: Using conda
+#### 🐍 Option 2: Using `conda`
 ```bash
 # Create and activate a conda environment with Python 3.9
 conda create -n myenv python=3.9

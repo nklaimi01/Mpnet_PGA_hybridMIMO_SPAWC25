@@ -6,13 +6,12 @@ Implementation of the methods proposed in the paper:
 > Nay Klaimi, Amira Bedoui, Clément Elvira, Philippe Mary, Luc Le Magoarou  
 > SPAWC 2025
 ## Getting Started
-### ⚠️ Python Compatibility
-This project requires **Python 3.9**.
+⚠️ This project requires **Python 3.9**.
 
 If you are using a different Python version, ensure to downgrade to Python 3.9 in your environment to avoid compatibility issues (e.g., `pkgutil.ImpImporter` error).
 
-### 💻 Setting Up the Environment
-It is recommended to create a virtual environment before installing dependencies.
+### Setting Up the Environment
+It is **recommended** to create a virtual environment before installing dependencies.
 #### 🧪 Option 1: Using `venv` (Standard Python Virtual Environment)
 ```bash
 # Create virtual environment

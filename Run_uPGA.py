@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import torch
 from tqdm import tqdm
 from pathlib import Path
-import models.ProjGradAscent as ProjGradAscent
+import models.uPGA_model as uPGA_model
 import utils.utils_function as utils_function
 import os
 from utils.utils_function import sum_loss,evaluate_sum_rate
@@ -175,7 +175,7 @@ for j,noise_var in enumerate(noise_var_list):
     mu_unf = torch.tensor([[hyp_mu] * (2)] * num_of_iter_pga_unf, requires_grad=True)
     lr=1e-4
     # uPGA model defining
-    unfolded_model = ProjGradAscent.ProjGA(mu_unf)
+    unfolded_model = uPGA_model.uPGA(mu_unf)
 
     #optimizer
     optimizer = torch.optim.Adam(unfolded_model.parameters(), lr=lr)

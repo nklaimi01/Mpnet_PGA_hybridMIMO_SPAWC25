@@ -1,4 +1,5 @@
 #%%
+'''this scripts computes achievable sum-rate for a fully digital system using the water filling algorithm'''
 import numpy as np
 from pathlib import Path
 import torch
@@ -93,7 +94,7 @@ for i in range(H_test.shape[0]):
     
     #s1 = torch.abs(torch.log(a4.det()))
 
-    #WF formula 
+    #Xater filling formula 
     s2= np.sum(np.log(1 + g*p/noise_var_DL))
 
 
@@ -108,10 +109,10 @@ print(np.mean(S2))
 
 # save sum rate
 sum_rate={}
-sum_rate['wf']=np.mean(S2)
+sum_rate['Fully_digital']=np.mean(S2)
 save_dir=path_init /'sumRate'/f'{noise_var_DL:.0e}/L_{L}_T_{T}'
 os.makedirs(save_dir,exist_ok=True)
-np.savez(save_dir/'wf.npz', **sum_rate)
+np.savez(save_dir/'Fully_digital.npz', **sum_rate)
 
 
 print('sum rate for fully digital system= ', sum_rate)

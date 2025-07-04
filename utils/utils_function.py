@@ -69,36 +69,6 @@ def init_scene(BS_position,f0):
     return scene,nominal_ant_positions,real_ant_positions 
 
 
-def preprocess(data_path,batch_size):
-    #Preprocessing:Dataset normalization 
-    
-    batch_idx=1
-    path_init = Path.cwd()/'.saved_data'
-
-    file_name=f"batch_0.npz" 
-    data = np.load(path_init/data_path/file_name)
-    channel_0= data['channel_train']
-
-    Dataset=channel_0
-
-
-    while(batch_idx<batch_size):
-        
-        #get channels       
-        file_name=f"batch_{batch_idx}.npz" 
-        data = np.load(path_init/data_path/file_name)
-        channel_train= data['channel_train']
-
-        Dataset=np.vstack((Dataset,channel_train))      
-        batch_idx+=1
-        
-    norm_channels=np.linalg.norm(Dataset,axis=1)
-    norm_max=np.max(norm_channels)
-    norm_min=np.min(norm_channels)
-    norm_factor=norm_max - norm_min
-    
-    return norm_factor
-
 def plot_learning_curve(name, train_losses,
                         valid_losses,
                         num_of_iter_pga_unf,

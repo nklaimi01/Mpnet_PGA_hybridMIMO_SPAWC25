@@ -5,7 +5,7 @@ import numpy as np
 seed_value=42
 torch.manual_seed(seed_value)
 
-class ProjGA(nn.Module):
+class uPGA(nn.Module):
 
     def __init__(self, mu):
         super().__init__()

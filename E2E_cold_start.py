@@ -199,7 +199,7 @@ H_test = torch.tensor(test_data['h'],dtype=torch.complex128).view(-1,U,A) # NOT 
 ###########-------------------------- E2E model WITHOUT pretraining --------------------------##########
 ########################################################################################################
 #MPNET
-import models.ProjGradAscent as ProjGradAscent
+import models.uPGA_model as uPGA_model
 import Mpnet_training
 optimizer='Adam'
 lr = 1e-3 #not used if we dont call train_online_test_inference function
@@ -244,7 +244,7 @@ hyp_mu=1e-4
 num_of_iter_pga_unf = 10 
 mu_unf = torch.tensor([[hyp_mu] * (2)] * num_of_iter_pga_unf, requires_grad=True)
 # uPGA model defining
-pga = ProjGradAscent.ProjGA(mu_unf)
+pga = uPGA_model.uPGA(mu_unf)
 
 
 E2E_model_naive=End_to_End_model.CompositeModel(pga , mpnet.mpNet_Constrained, nominal_ant_positions,DoA,g_vec,lambda_)
@@ -330,7 +330,7 @@ plot_sum_rate(sum_rate,'uPGA',estimator,sum_rate_0)
 nmse_test=torch.mean(torch.sum(torch.abs(h_test-h_hat_test)**2,1)/torch.sum(torch.abs(h_test)**2,1))
 
 
-save_sum_rate(f'End_To_End_naive',sum_rate)
+save_sum_rate(f'E2E_cold_start',sum_rate)
 
 
 #NMSE PLOT

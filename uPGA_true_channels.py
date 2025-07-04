@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import torch
 from tqdm import tqdm
 from pathlib import Path
-import models.ProjGradAscent as ProjGradAscent
+import models.uPGA_model as uPGA_model
 import utils.utils_function as utils_function
 import os
 from utils.utils_function import sum_loss,evaluate_sum_rate,save_sum_rate,plot_sum_rate
@@ -14,19 +14,18 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #%% ###############################################################################################################
 ########################################## TRUE CHANNEL + uPGA ###################################################
 ##################################################################################################################
-# %%
+'''This scripts executes the unfolded PGA algorithm using the true channels as input '''
 Supervised=False
 Constrained=True
 Constrained_notConstrained="mpnet_c" if Constrained else "mpnet"
 mpnet_sup_unsup="sup" if Supervised else "unsup"
-estimator=f'{Constrained_notConstrained}_{mpnet_sup_unsup}' 
-# estimator='lmmse'
+#estimator='H_true
 
 U = 4   # Num of users
 L = 16 # RF chains
 T = 1  # Mesures
 A = 64   # Tx antennas
-estimator='H_true'
+
 
 #%%
 noise_var_list=[2e-3]
@@ -38,7 +37,7 @@ hy_p_mu_list=[8e-4]
 for noise_var in noise_var_list:
     # noise_var_DL=A*noise_var
     noise_var_DL=noise_var
-    print(f'Uplink noise variance={noise_var:.0e}, Downlink noise variance={noise_var_DL:.0e}, L={L}, T={T}, estimator={estimator}')
+    print(f'Uplink noise variance={noise_var:.0e}, Downlink noise variance={noise_var_DL:.0e}, L={L}, T={T}, with true channels')
 
     max_batch_number  = 300
 
@@ -111,17 +110,17 @@ for noise_var in noise_var_list:
     #--------------------------------------------------------------------------------------------------
     # parameters defining
     hyp_mu=1e-3
-    num_of_iter_pga_unf = 10 
-    mu_unf = torch.tensor([[hyp_mu] * (2)] * num_of_iter_pga_unf, requires_grad=True)
+    num_of_iter_upga = 10 
+    mu_unf = torch.tensor([[hyp_mu] * (2)] * num_of_iter_upga, requires_grad=True)
     lr=1e-5
     # uPGA model defining
-    unfolded_model = ProjGradAscent.ProjGA(mu_unf)
+    unfolded_model = uPGA_model.uPGA(mu_unf)
 
     #optimizer
     optimizer = torch.optim.Adam(unfolded_model.parameters(), lr=lr)
     ##%%-----------------------evaluating model BEFORE training--------------------------------------
-    s,_,_,WA,WD = unfolded_model.forward(H_true_test, U, L,  num_of_iter_pga_unf,noise_var_DL)
-    sum_rate_0= evaluate_sum_rate(H_true_test, WA,WD,U,noise_var_DL,H_true_test.shape[0],num_of_iter_pga_unf)
+    s,_,_,WA,WD = unfolded_model.forward(H_true_test, U, L,  num_of_iter_upga,noise_var_DL)
+    sum_rate_0= evaluate_sum_rate(H_true_test, WA,WD,U,noise_var_DL,H_true_test.shape[0],num_of_iter_upga)
 
     ##%%---------------------------------------training-----------------------------------------------
     epochs = 30
@@ -137,16 +136,16 @@ for noise_var in noise_var_list:
             if i==0 and b==0:
                 with torch.no_grad():
                     # train loss
-                    sum_rate_est, wa, wd,_,_ = unfolded_model.forward(H_true_train, U, L,  num_of_iter_pga_unf,noise_var_DL)
+                    sum_rate_est, wa, wd,_,_ = unfolded_model.forward(H_true_train, U, L,  num_of_iter_upga,noise_var_DL)
                     train_losses.append(sum_loss(wa, wd, H_true_train, U,  H_true_train.shape[0],noise_var_DL))
                     # validation loss
-                    __, wa, wd,_,_ = unfolded_model.forward(H_true_val, U, L,  num_of_iter_pga_unf,noise_var_DL)
+                    __, wa, wd,_,_ = unfolded_model.forward(H_true_val, U, L,  num_of_iter_upga,noise_var_DL)
                     valid_loss=sum_loss(wa, wd, H_true_val, U,  H_true_val.shape[0],noise_var_DL)
                     valid_losses.append(valid_loss)
 
 
         ################################## channel estimation + uPGA #####################################################
-            sum_train, wa, wd , _,_ = unfolded_model.forward(H_true_batched, U, L,  num_of_iter_pga_unf,noise_var_DL)
+            sum_train, wa, wd , _,_ = unfolded_model.forward(H_true_batched, U, L,  num_of_iter_upga,noise_var_DL)
 
             loss = sum_loss(wa, wd, H_true_batched, U, batch_size_upga, noise_var_DL)
 
@@ -157,25 +156,25 @@ for noise_var in noise_var_list:
  
         with torch.no_grad():
             # train loss
-            sum_rate_est, wa, wd,_,_ = unfolded_model.forward(H_true_train, U, L,  num_of_iter_pga_unf,noise_var_DL)
+            sum_rate_est, wa, wd,_,_ = unfolded_model.forward(H_true_train, U, L,  num_of_iter_upga,noise_var_DL)
             train_losses.append(sum_loss(wa, wd, H_true_train, U,  H_true_train.shape[0],noise_var_DL))
 
             # validation loss
-            __, wa, wd,_,_ = unfolded_model.forward(H_true_val, U, L,  num_of_iter_pga_unf,noise_var_DL)
+            __, wa, wd,_,_ = unfolded_model.forward(H_true_val, U, L,  num_of_iter_upga,noise_var_DL)
             valid_loss=sum_loss(wa, wd, H_true_val, U,  H_true_val.shape[0],noise_var_DL)
             valid_losses.append(valid_loss)
             if valid_loss<best_loss:
-                torch.save(unfolded_model,save_dir/f'pga_H_true_L_{L}_T_{T}.pth')
+                torch.save(unfolded_model,save_dir/f'uPGA_true_channels_L_{L}_T_{T}.pth')
                 best_loss=valid_loss
                 best_epoch=i+1
 
     #plotting learning curve
-    name=f'Loss_curve_upga_{estimator}_L_{L}_T_{T}'
-    utils_function.plot_learning_curve(name,train_losses,valid_losses,num_of_iter_pga_unf,epochs,batch_size_upga)
+    name=f'Loss_curve_uPGA_true_channels_L_{L}_T_{T}'
+    utils_function.plot_learning_curve(name,train_losses,valid_losses,num_of_iter_upga,epochs,batch_size_upga)
     ##%%
-    # num_of_iter_pga_unf=10
-    best_model=torch.load(save_dir/f'pga_{estimator}_L_{L}_T_{T}.pth')
-    s,_,_,WA,WD = best_model.forward(H_true_test, U, L,  num_of_iter_pga_unf,noise_var_DL)
-    sum_rate_est= evaluate_sum_rate(H_true_test, WA,WD,U,noise_var_DL,H_true_test.shape[0],num_of_iter_pga_unf)
-    save_sum_rate(f'unf_est_{estimator}',sum_rate_est,noise_var_DL,L,T)
-    plot_sum_rate(sum_rate_est,'uPGA',estimator,A,U,L,T,sum_rate_0)
+
+    best_model=torch.load(save_dir/f'uPGA_true_channels_L_{L}_T_{T}.pth')
+    s,_,_,WA,WD = best_model.forward(H_true_test, U, L,  num_of_iter_upga,noise_var_DL)
+    sum_rate_est= evaluate_sum_rate(H_true_test, WA,WD,U,noise_var_DL,H_true_test.shape[0],num_of_iter_upga)
+    save_sum_rate(f'uPGA_true_channels',sum_rate_est,noise_var_DL,L,T)
+    plot_sum_rate(sum_rate_est,'uPGA','True channels',A,U,L,T,sum_rate_0)

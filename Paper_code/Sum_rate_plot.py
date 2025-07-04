@@ -6,9 +6,9 @@ import torch
 import matplotlib.patches as mpatches
 import sys
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-import models.ProjGradAscent
+import models.uPGA_model
 import models.End_to_End_model
-'''ne marche pas encore'''
+
 #%%
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 path_init=Path.cwd().parent/'.saved_data'
@@ -84,8 +84,8 @@ y = sum_rate.cpu().detach().numpy()
 x = np.arange(len(y)) 
 
 #water filling (fully digital):
-WF=np.load(path_init/'sumRate'/f'{noise_var_DL:.0e}/L_{L}_T_{T}/wf.npz')['wf']
-# plt.plot(x,[WF]*len(x),label='fully digital')
+Fully_digital=np.load(path_init/'sumRate'/f'{noise_var_DL:.0e}/L_{L}_T_{T}/Fully_digital.npz')['Fully_digital']
+
 
 #upga using true channel knowledge
 color_true_h='tab:cyan'
@@ -157,7 +157,7 @@ plt.xlabel('Number of Iterations',fontsize=14)
 plt.ylabel('Achievable Rate',fontsize=14)
 plt.grid()
 
-upper_bound_patch = mpatches.Patch(color='none', label=f"Fully digital = {WF:.2F}")
+upper_bound_patch = mpatches.Patch(color='none', label=f"Fully digital = {Fully_digital:.2F}")
 
 # Add legend with proxy artist
 plt.legend(handles=[upper_bound_patch] + plt.gca().get_legend_handles_labels()[0],loc='lower right', bbox_to_anchor=(1, 0.2))
@@ -174,32 +174,32 @@ plt.show()
 ##################################################################################################
 
 noise_variances=[6e-04, 2e-03, 6e-03, 2e-02, 6e-02, 2e-01]
-unf_mpnet_unsup_list,unf_mpnet_sup_list,end_to_end_naive_list,end_to_end_sup_list,unf_lmmse_list,unf_true_list,WF_list=[],[],[],[],[],[],[]
+unf_mpnet_unsup_list,unf_mpnet_sup_list,E2E_cold_start_list,E2E_warm_start_list,unf_lmmse_list,uPGA_True_channels_list,Fully_digital_list=[],[],[],[],[],[],[]
 for i,s in enumerate(noise_variances):
     path=path_init/'sumRate'/f'{s:.0e}/L_{L}_T_{T}'
-    WF=np.load(path/'wf.npz')['wf']
-    unf_true_channels= np.load(path/'unf_true_channel.npz')['unf_true_channel']
-    end_to_end_sup=np.load(path/'End_To_End_mpnet_sup.npz')['End_To_End_mpnet_sup']
+    Fully_digital=np.load(path/'Fully_digital.npz')['Fully_digital']
+    uPGA_True_channels= np.load(path/'uPGA_true_channels.npz')['uPGA_true_channels']
+    E2E_warm_start=np.load(path/'E2E_warm_start.npz')['E2E_warm_start']
     unf_mpnet_sup= np.load(path/'unf_est_mpnet_sup.npz')['unf_est_mpnet_sup']
     unf_mpnet_c_unsup= np.load(path/'unf_est_mpnet_c_unsup.npz')['unf_est_mpnet_c_unsup']
-    end_to_end_naive=np.load(path/'End_To_End_naive.npz')['End_To_End_naive']
+    E2E_cold_start=np.load(path/'E2E_cold_start.npz')['E2E_cold_start']
     unf_lmmse=np.load(path/'unf_est_lmmse.npz')['unf_est_lmmse']
 
-    WF_list.append(WF)
-    unf_true_list.append(unf_true_channels)
-    end_to_end_sup_list.append(end_to_end_sup)
+    Fully_digital_list.append(Fully_digital)
+    uPGA_True_channels_list.append(uPGA_True_channels)
+    E2E_warm_start_list.append(E2E_warm_start)
     unf_mpnet_sup_list.append(unf_mpnet_sup)
     unf_mpnet_unsup_list.append(unf_mpnet_c_unsup)
-    end_to_end_naive_list.append(end_to_end_naive)
+    E2E_cold_start_list.append(E2E_cold_start)
     unf_lmmse_list.append(unf_lmmse)
 
 
-y1 = np.array([arr for arr in WF_list])
-y2 = np.array([arr[-1] for arr in unf_true_list])
-y3 = np.array([arr[-1] for arr in end_to_end_sup_list])
+y1 = np.array([arr for arr in Fully_digital_list])
+y2 = np.array([arr[-1] for arr in uPGA_True_channels_list])
+y3 = np.array([arr[-1] for arr in E2E_warm_start_list])
 y4 = np.array([arr[-1] for arr in unf_mpnet_sup_list])
 y5 = np.array([arr[-1] for arr in unf_mpnet_unsup_list])
-y6= np.array([arr[-1] for arr in end_to_end_naive_list])
+y6= np.array([arr[-1] for arr in E2E_cold_start_list])
 y7 = np.array([arr[-1] for arr in unf_lmmse_list])
 
 x=np.arange(len(y1))

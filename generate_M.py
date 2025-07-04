@@ -7,7 +7,7 @@ import torch
 #%%
 M_dict={}
 M_test_dict={}
-batch_size=300
+nb_batches=300
 nb_channels_test=1000
 nb_channel_train=100
 nb_BS_antenna=64
@@ -46,7 +46,7 @@ np.savez(save_dir/ 'test.npz', **M_test_dict)
 
 i=0
 
-while i<batch_size:
+while i<nb_batches:
 
     # generate Measurement matrix for test 
     M_list=[]

@@ -76,14 +76,12 @@ A     = 64       # BS antennas
 # noise_var_DL=A*noise_var # Downlinklink noise variance
 noise_var_DL=noise_var # Downlinklink noise variance
 
-mpnet_Supervised=True
-Constrained=False
-Constrained_notConstrained="mpnet_c" if Constrained else "mpnet"
-mpnet_sup_unsup="sup" if mpnet_Supervised else "unsup"
+Constrained_notConstrained="mpnet"
+mpnet_sup_unsup="sup"
 estimator=f'{Constrained_notConstrained}_{mpnet_sup_unsup}'
 L     = 16       # RF chains
 T     = 1       # Instant
-print(f"Uplink noise vrariance={noise_var:.0e}, Downlink noise variance={noise_var_DL:.0e}, L={L}, T={T}, supervised={mpnet_Supervised}")
+print(f"Uplink noise vrariance={noise_var:.0e}, Downlink noise variance={noise_var_DL:.0e}, L={L}, T={T}")
 # %% Parameters defining
 k=5 # iteration mpnet sc
 num_of_iter_pga_unf=10 # iteration pga
@@ -306,7 +304,7 @@ plot_sum_rate(sum_rate,'uPGA',estimator,sum_rate_0)
 nmse_test=torch.mean(torch.sum(torch.abs(h_test-h_hat_test)**2,1)/torch.sum(torch.abs(h_test)**2,1))
 
 #save final sumrate
-save_sum_rate(f'End_To_End_{estimator}',sum_rate)
+save_sum_rate(f'E2E_warm_start',sum_rate)
 
 
 # %% ----------------------- estimated channel evaluation over E2E training ---------------------

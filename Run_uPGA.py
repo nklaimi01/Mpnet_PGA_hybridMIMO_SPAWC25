@@ -77,7 +77,7 @@ for j,noise_var in enumerate(noise_var_list):
     ## %%------------------------------------------Get data-------------------------------------------------
 
 
-    dataset_dir = f'Data/{noise_var:.0e}/data_var_snr/T_{T}'
+    dataset_dir = f'Data/channels_var_snr/{noise_var:.0e}/T_{T}'
     estimation_dir = f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/{estimator}'
 
     batch_idx=0

@@ -292,7 +292,7 @@ def save_estimation_MP_LMMSE(data_file, data_pred_MP_nominal, data_pred_MP_real,
 # nb_BS_antenna=64
 # batch_size = 300
 # k = 8
-# data_file=f'Data/{noise_var:.0e}/data_var_snr/T_{T}'
+# data_file=f'Data/channels_var_snr/{noise_var:.0e}/T_{T}'
 
 # #%% ----------------------------------mpNet--------------------------------------------------------------------
 
@@ -306,7 +306,7 @@ def save_estimation_MP_LMMSE(data_file, data_pred_MP_nominal, data_pred_MP_real,
 # #%% ---------------------------------- LMMSE / MP --------------------------------------------------------------------
 # #get real and nominal antenna pos
 # path_init=Path.cwd()/'.saved_data'
-# antenna_pos = np.load(path_init/'Data/datasionna/antenna_position.npz')
+# antenna_pos = np.load(path_init/'Data/antenna_position.npz')
 # nominal_ant_positions=antenna_pos['nominal_position']
 # real_ant_positions=antenna_pos['real_position']
 

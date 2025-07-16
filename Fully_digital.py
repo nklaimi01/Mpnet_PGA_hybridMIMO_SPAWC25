@@ -17,7 +17,7 @@ test_size  = 1000 # NUMBER OF MIMO CHANNELS
 
 #Load data
 path_init=Path.cwd()/'.saved_data'
-dataset_dir = f'Data/{noise_var:.0e}/data_var_snr/T_{T}/test_data.npz'  
+dataset_dir = f'Data/channels_var_snr/{noise_var:.0e}/T_{T}/test_data.npz'  
 data = np.load(path_init/dataset_dir)
 
 h=torch.tensor(data['h'],dtype=torch.complex128)

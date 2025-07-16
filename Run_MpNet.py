@@ -44,7 +44,7 @@ f0=28e9 #HZ
 sigma_ant= 0.1
 
 #get real and nominal antenna pos
-file_name = r'Data/datasionna/antenna_position.npz'  
+file_name = r'Data/antenna_position.npz'  
 antenna_pos = np.load(path_init/file_name)
 nominal_ant_positions=antenna_pos['nominal_position']
 real_ant_positions=antenna_pos['real_position']
@@ -188,7 +188,7 @@ plt.show()
 # from estimate_channels import save_estimation_mpnet,save_estimation_MP_LMMSE
 # import utils.generate_steering as generate_steering
 
-# data_file=f'Data/{noise_var:.0e}/data_var_snr/T_{T}'
+# data_file=f'Data/channels_var_snr/{noise_var:.0e}/T_{T}'
 # # -------------------------------- mpNet -------------------------------------------------------------------
 
 # data_pred_mpnet=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/mpnet_c_unsup'
@@ -201,7 +201,7 @@ plt.show()
 # # -------------------------------- LMMSE / MP ---------------------------------------------------------------
 # #get real and nominal antenna pos
 # path_init=Path.cwd()/'.saved_data'
-# antenna_pos = np.load(path_init/'Data/datasionna/antenna_position.npz')
+# antenna_pos = np.load(path_init/'Data/antenna_position.npz')
 # nominal_ant_positions=antenna_pos['nominal_position']
 # real_ant_positions=antenna_pos['real_position']
 

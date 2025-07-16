@@ -97,7 +97,7 @@ os.makedirs(save_dir,exist_ok=True)
 #%%----------------------------------- Load Data --------------------------------------------------------
 # load test data 
 
-dataset_dir = f'Data/{noise_var:.0e}/data_var_snr/T_{T}'  
+dataset_dir = f'Data/channels_var_snr/{noise_var:.0e}/T_{T}'  
 test_data = np.load(path_init/dataset_dir/'test_data.npz')
 # Get Measurement matrix
 M_data=np.load(path_init/'Data'/f'Measurement_matrix/L_{L}_T_{T}'/'test.npz')  
@@ -224,7 +224,7 @@ f0=28e9 #HZ
 sigma_ant= 0.1
 #get real and nominal antenna pos
 path_init=Path.cwd()/'.saved_data'
-file_name = r'Data/datasionna/antenna_position.npz'  
+file_name = r'Data/antenna_position.npz'  
 antenna_pos = np.load(path_init/file_name)
 nominal_ant_positions=antenna_pos['nominal_position']
 real_ant_positions=antenna_pos['real_position']

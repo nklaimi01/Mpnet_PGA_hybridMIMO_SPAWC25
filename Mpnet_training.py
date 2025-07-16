@@ -154,7 +154,7 @@ class UnfoldingModel_Sim:
         if self.train_type=='Online':
  
             path_init=Path.cwd()/'.saved_data'
-            file_name = f'Data/{noise_var:.0e}/data_var_snr/T_{self.T}/test_data.npz'  
+            file_name = f'Data/channels_var_snr/{noise_var:.0e}/T_{self.T}/test_data.npz'  
             test_data = np.load(path_init/file_name)
             M_data=np.load(path_init/'Data'/f'Measurement_matrix/L_{self.L}_T_{self.T}'/'test.npz')
                 
@@ -234,7 +234,7 @@ class UnfoldingModel_Sim:
                     
                     # Load Train channel
                     path_init=Path.cwd()/'.saved_data'
-                    file_name = f'Data/{noise_var:.0e}/data_var_snr/T_{self.T}/batch_{batch}.npz'  
+                    file_name = f'Data/channels_var_snr/{noise_var:.0e}/T_{self.T}/batch_{batch}.npz'  
                     train_data = np.load(path_init/file_name)
                     M_data=np.load(path_init/'Data'/f'Measurement_matrix/L_{self.L}_T_{self.T}'/f'batch_{batch}.npz')
                     

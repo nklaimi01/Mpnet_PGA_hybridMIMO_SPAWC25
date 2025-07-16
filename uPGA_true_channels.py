@@ -47,7 +47,7 @@ for noise_var in noise_var_list:
     ## %%------------------------------------------Get data-------------------------------------------------
 
 
-    dataset_dir = f'Data/{noise_var:.0e}/data_var_snr/T_{T}'
+    dataset_dir = f'Data/channels_var_snr/{noise_var:.0e}/T_{T}'
 
     batch_idx=0
 

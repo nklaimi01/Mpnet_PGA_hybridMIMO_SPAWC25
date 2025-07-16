@@ -54,7 +54,7 @@ num_of_iter_pga_unf=10
 #-------------------- collecting data -----------------------------------------------------
 pga_models_dir=path_init/f'pretrained_upga_models/{noise_var_DL:.0e}'
 E2E_models_dir=path_init/f'pretrained_E2E_models/{noise_var_DL:.0e}'
-dataset_dir = f'Data/{noise_var:.0e}/data_var_snr/T_{T}' 
+dataset_dir = f'Data/channels_var_snr/{noise_var:.0e}/T_{T}' 
 
 test_data = np.load(path_init / dataset_dir/ f'test_data.npz')
 M_test_data=np.load(path_init/'Data'/f'Measurement_matrix/L_{L}_T_{T}'/'test.npz')

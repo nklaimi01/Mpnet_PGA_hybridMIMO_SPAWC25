@@ -1,5 +1,5 @@
 import numpy as np 
-import utils.utils_function as utils_function
+from utils.utils_function import init_scene
 from sionna.rt import Transmitter
 import sionna
 import os
@@ -13,7 +13,7 @@ def generate_dataset(save_dir,nb_batches,size_batches,nb_BS_antennas):
     os.makedirs(save_dir,exist_ok=True)
     f0=28e9 #HZ 
     BS_position=[100, -90, 30]
-    scene,nominal_ant_positions,real_ant_positions =utils_function.init_scene(BS_position,f0)
+    scene,nominal_ant_positions,real_ant_positions =init_scene(BS_position,f0)
 
     scene.preview()
 

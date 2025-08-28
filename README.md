@@ -32,9 +32,13 @@ To install all required Python packages, run the following command:
 ```bash
 pip install -r requirements.txt
 ```
-### Generate needed data using sionna library 
-<!-- generate_data_sionna.py ==> generate_data_varying_snr.py ==> generate_M_DOA.py -->
-<!-- write code that executes all of data generation -->
+### 🔧 Generating Simulation Data  
+We use the **[Sionna Ray Tracing library](https://nvlabs.github.io/sionna/)** to generate the channel data required for training and testing.  
+
+Run the script [`generate_data.py`](./generate_data.py):  
+```bash
+python generate_data.py
+```
 
 ## 📚 Citation
 Please consider citing the original paper if this code contributes to your work.

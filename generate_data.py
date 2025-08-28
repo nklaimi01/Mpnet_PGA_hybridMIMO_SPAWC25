@@ -8,6 +8,7 @@ path_init = Path.cwd()/'.saved_data'
 save_dir=path_init/'Data'
 os.makedirs(save_dir,exist_ok=True)
 
+#set the following parameters:
 size_batches=100
 nb_test_batches= 10
 nb_train_batches=300

@@ -185,51 +185,51 @@ plt.show()
 # ############################## save estimations #######################################
 # #######################################################################################
 
-# from estimate_channels import save_estimation_mpnet,save_estimation_MP_LMMSE
-# import utils.generate_steering as generate_steering
+from utils.save_channel_estimations import save_estimation_mpnet,save_estimation_MP_LMMSE
+import utils.generate_steering as generate_steering
 
-# data_file=f'Data/channels_var_snr/{noise_var:.0e}/T_{T}'
-# # -------------------------------- mpNet -------------------------------------------------------------------
+data_file=f'Data/channels_var_snr/{noise_var:.0e}/T_{T}'
+# -------------------------------- mpNet -------------------------------------------------------------------
 
-# data_pred_mpnet=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/mpnet_c_unsup'
-# model_=f'pretrained_mpnet_models/{noise_var:.0e}/mpnet_c_unsup_L_{L}_T_{T}.pth'
-# save_estimation_mpnet(model_, data_file, data_pred_mpnet, batch_size, k, T, L,noise_var)
-# data_pred_mpnet=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/mpnet_sup'
-# model_=f'pretrained_mpnet_models/{noise_var:.0e}/mpnet_sup_L_{L}_T_{T}.pth'
-# save_estimation_mpnet(model_, data_file, data_pred_mpnet, batch_size, k, T, L,noise_var)
+data_pred_mpnet=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/mpnet_c_unsup'
+model_=f'pretrained_mpnet_models/{noise_var:.0e}/mpnet_c_unsup_L_{L}_T_{T}.pth'
+save_estimation_mpnet(model_, data_file, data_pred_mpnet, batch_size, k, T, L,noise_var)
+data_pred_mpnet=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/mpnet_sup'
+model_=f'pretrained_mpnet_models/{noise_var:.0e}/mpnet_sup_L_{L}_T_{T}.pth'
+save_estimation_mpnet(model_, data_file, data_pred_mpnet, batch_size, k, T, L,noise_var)
 
-# # -------------------------------- LMMSE / MP ---------------------------------------------------------------
-# #get real and nominal antenna pos
-# path_init=Path.cwd()/'.saved_data'
-# antenna_pos = np.load(path_init/'Data/antenna_position.npz')
-# nominal_ant_positions=antenna_pos['nominal_position']
-# real_ant_positions=antenna_pos['real_position']
+# -------------------------------- LMMSE / MP ---------------------------------------------------------------
+#get real and nominal antenna pos
+path_init=Path.cwd()/'.saved_data'
+antenna_pos = np.load(path_init/'Data/antenna_position.npz')
+nominal_ant_positions=antenna_pos['nominal_position']
+real_ant_positions=antenna_pos['real_position']
 
-# ######Dictionnary parameters######
-# #random Azimuth angles uniformly distributed between 0 and 2*pi
-# DoA= np.load(path_init/f'Data/DoA.npz')['DoA']
-# g_vec= np.ones(nb_BS_antenna)
-# lambda_ =  0.010706874
-# #--------------channel_estimations--------------
+######Dictionnary parameters######
+#random Azimuth angles uniformly distributed between 0 and 2*pi
+DoA= np.load(path_init/f'Data/DoA.npz')['DoA']
+g_vec= np.ones(nb_BS_antenna)
+lambda_ =  0.010706874
+#--------------channel_estimations--------------
 
-# data_pred_MP_nominal=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/nominal'
-# data_pred_MP_real=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/real'
-# data_pred_LMMSE=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/lmmse'
-# batch_size_est=300
+data_pred_MP_nominal=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/nominal'
+data_pred_MP_real=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/real'
+data_pred_LMMSE=f'Channel_estimation/{noise_var:.0e}/L_{L}_T_{T}/lmmse'
+batch_size_est=300
 
-# # construct nominal dictionary 
-# dict_nominal=generate_steering.steering_vect_c(torch.tensor(nominal_ant_positions).type(torch.FloatTensor),
-#                                                        torch.tensor(DoA).type(torch.FloatTensor),
-#                                                        torch.tensor(g_vec),
-#                                                        lambda_)
-# # construct real dictionary 
-# dict_real   =generate_steering.steering_vect_c(torch.tensor(real_ant_positions).type(torch.FloatTensor),
-#                                                        torch.tensor(DoA).type(torch.FloatTensor),
-#                                                        torch.tensor(g_vec),
-#                                                        lambda_)
+# construct nominal dictionary 
+dict_nominal=generate_steering.steering_vect_c(torch.tensor(nominal_ant_positions).type(torch.FloatTensor),
+                                                       torch.tensor(DoA).type(torch.FloatTensor),
+                                                       torch.tensor(g_vec),
+                                                       lambda_)
+# construct real dictionary 
+dict_real   =generate_steering.steering_vect_c(torch.tensor(real_ant_positions).type(torch.FloatTensor),
+                                                       torch.tensor(DoA).type(torch.FloatTensor),
+                                                       torch.tensor(g_vec),
+                                                       lambda_)
 
 
-# save_estimation_MP_LMMSE(data_file, data_pred_MP_nominal, data_pred_MP_real, data_pred_LMMSE, batch_size, k, T, L, dict_nominal, dict_real,nb_BS_antenna,noise_var)
+save_estimation_MP_LMMSE(data_file, data_pred_MP_nominal, data_pred_MP_real, data_pred_LMMSE, batch_size, k, T, L, dict_nominal, dict_real,nb_BS_antenna,noise_var)
 
 
 # %%

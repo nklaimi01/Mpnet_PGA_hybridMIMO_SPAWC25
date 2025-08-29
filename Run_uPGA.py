@@ -42,17 +42,15 @@ def save_sum_rate(file_name,sum_rate_,noise_var_DL):
     os.makedirs(save_dir,exist_ok=True)
     np.savez(save_dir/f'{file_name}', **sum_rate)
 
-# %%
-Supervised=False
-Constrained=True
-Constrained_notConstrained="mpnet_c" if Constrained else "mpnet"
-mpnet_sup_unsup="sup" if Supervised else "unsup"
-estimator=f'{Constrained_notConstrained}_{mpnet_sup_unsup}' 
-# estimator='lmmse'
+# %% specify the channel estimator used for this training
+a="mpnet_sup"
+b="mpnet_c_unsup"
+c="lmmse"
+estimator=a
 
 U = 4   # Num of users
 L = 16 # RF chains
-T = 1  # Mesures
+T = 1  # Timeframes
 A = 64   # Tx antennas
 #%%
 noise_var_list=[2e-3]

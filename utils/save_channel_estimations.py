@@ -5,7 +5,7 @@ from tqdm import trange,tqdm
 from pathlib import Path
 import utils.sparse_recovery as sparse_recovery
 import os
-from utils.lmmse_hybrid import LMMSE_estimation
+from utils.lmmse_hybridMIMO import LMMSE_estimation
 import utils.generate_steering as generate_steering
 import torch
 from pathlib import Path

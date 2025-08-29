@@ -2,7 +2,7 @@
 from pathlib import Path
 import os
 import numpy as np
-from utils.generate_data_functions import *
+from utils.data_gen_utils_functions import *
 
 path_init = Path.cwd()/'.saved_data'
 save_dir=path_init/'Data'

@@ -12,7 +12,7 @@ from torch.nn.utils import parameters_to_vector
 import matplotlib as mpl
 from tqdm import trange
 import os
-from utils.lmmse_hybrid import LMMSE_estimation
+from utils.lmmse_hybridMIMO import LMMSE_estimation
 import time
 from tqdm import tqdm
 

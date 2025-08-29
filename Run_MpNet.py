@@ -1,7 +1,7 @@
 #%%
 import numpy as np
 import time
-import Mpnet_training
+import models.Mpnet_training as Mpnet_training
 import torch
 from pathlib import Path
 import os

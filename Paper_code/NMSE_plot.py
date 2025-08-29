@@ -13,7 +13,7 @@ save_dir=path_init/'paper_mpnet_models'
 
 import sys
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-import Mpnet_training
+import models.Mpnet_training as Mpnet_training
 
 # specify parameters
 noise_var= 2e-3 #SNR_ul=15 dB
@@ -85,7 +85,7 @@ import sys
 path_init = Path.cwd().parent / '.saved_data'
 save_dir = path_init / 'paper_mpnet_models'
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-import Mpnet_training
+import models.Mpnet_training as Mpnet_training
 
 # === Paramètres des 3 cas ===
 configs = [

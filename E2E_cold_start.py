@@ -200,7 +200,7 @@ H_test = torch.tensor(test_data['h'],dtype=torch.complex128).view(-1,U,A) # NOT 
 ########################################################################################################
 #MPNET
 import models.uPGA_model as uPGA_model
-import Mpnet_training
+import models.Mpnet_training as Mpnet_training
 optimizer='Adam'
 lr = 1e-3 #not used if we dont call train_online_test_inference function
 lr_constrained=1e-5 #not used if we dont call train_online_test_inference function
